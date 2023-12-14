@@ -1,46 +1,51 @@
 package com.d121211030.articartwork
-
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.remember
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.d121211030.articartwork.artworkdetail.ArtworkDetailScreen
+import com.d121211030.articartwork.artworklist.ArtworkListScreen
 import com.d121211030.articartwork.ui.theme.ArticArtworkTheme
+import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ArticArtworkTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                val navController = rememberNavController()
+                NavHost(
+                    navController = navController,
+                    startDestination = "artwork_list_screen"
                 ) {
-                    Greeting("Android")
+                    composable("artwork_list_screen") {
+                        ArtworkListScreen(navController = navController)
+                    }
+                    composable(
+                        "artwork_detail_screen/{artworkTitle}",
+                        arguments = listOf(
+                            navArgument("artworkTitle") {
+                                type = NavType.StringType
+                            }
+                        )
+                    ) {
+                        val artworkTitle = remember {
+                            it.arguments?.getString("artworkTitle")
+                        }
+                        ArtworkDetailScreen(
+                            artworkTitle = artworkTitle?.lowerCase(Locale.ROOT) ?: "",
+                            navController = navController
+                        )
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ArticArtworkTheme {
-        Greeting("Android")
     }
 }
