@@ -1,0 +1,6 @@
+<resources>
+    <style name="Widget.Theme.ArtLovers.MyView" parent="">
+        <item name="android:background">@color/gray_600</item>
+        <item name="exampleColor">@color/dark_blue</item>
+    </style>
+</resources>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ArtLovers</string>
+    <string name="tab_home">Home</string>
+    <string name="tab_loved">Loved</string>
+    <string name="hello_blank_fragment">Blank</string>
+    <string name="title_activity_feed">FeedActivity</string>
+    <string name="empty_loved_list">Nothing loved yet</string>
+    <string name="search">Search</string>
+</resources>

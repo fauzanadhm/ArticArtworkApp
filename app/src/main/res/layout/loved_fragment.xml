@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:id="@+id/lovedFeedScreen">
+
+    <TextView
+        android:id="@+id/empty_love_view"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/empty_loved_list"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/loved_list"
+        android:name="com.example.artlovers.HomeFeedFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/text_margin"
+        android:layout_marginRight="@dimen/text_margin"
+        app:layoutManager="LinearLayoutManager"
+        tools:context=".ui.feeds.loved.LovedFeedScreen"
+        tools:listitem="@layout/artwork_feed_item"/>
+
+</LinearLayout>
